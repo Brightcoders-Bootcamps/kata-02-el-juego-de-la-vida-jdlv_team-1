@@ -5,7 +5,6 @@ class Celula {
   }
   // CONDICIONES PARA LA CELULA
   // 1 = VIVO    0 = MUERTO
-
   getLife() {
       return this.life;
   }
@@ -79,13 +78,13 @@ function initGame(){
         for (let y = 0; y < numY; y++) {
             var randomvar = Math.random();
             if (randomvar >= 0.5) {
-                cell = new celula(0, 0);
+                cell = new Celula(0, 0);
                 arrayCells[x][y] = cell;
             } else {
-                cell = new celula(1, 0);
+                cell = new Celula(1, 0);
                 arrayCells[x][y] = cell;
             }
-            resutArrayCell+= arrayCells[x][y].getNumCell();
+            resutArrayCell+= arrayCells[x][y].toString();
         }
         resutArrayCell += '\n';
     }
@@ -140,7 +139,7 @@ function showResult(array){
     resutNewArray = '';
     for (let x = 0; x < array.length; x++) {
         for (let y = 0; y < array[x].length; y++) {
-            resutNewArray += arrayCells[x][y].getNumCell();
+            resutNewArray += arrayCells[x][y].toString();
         }
         resutNewArray += '\n';
     }
