@@ -83,23 +83,3 @@ test('Prueba con celula viva y vecinos vivos = 3, regresa celula viva en la mism
     let expectCellDead= newArray[row][column];
     expect(expectCellDead.getLife()).toBe(1);
 });
-// function rulesCell(cell,rows,columns) {    
-//     //console.log("vecinos=" + neighbors + "   fila" + rows + "  columna=" + columns)
-//     if ((cell.getLife() == 1) && (cell.getNeighbors() < 2)) {
-//         newArray[rows][columns].setLife(0);         // Soledad
-//     } else if ((cell.getLife() == 1) && (cell.getNeighbors() > 3)) {
-//         newArray[rows][columns].setLife(0);         // Sobrepoblación
-//     } else if ((cell.getLife() == 0) && (cell.getNeighbors() == 3)) {
-//         newArray[rows][columns].setLife(1);         // Reproducción
-//     } else {
-//         newArray[rows][columns] = cell;
-//     }
-// }
-
-/*
-test('test', () => {
-    debugger;
-    c = new Celula(0, 3);
-    expect(c.toString).toBe('.');
-});
-*/

@@ -64,10 +64,7 @@ function play(){
 }
 
 function initGame(){
-    //let arrayCells;
     resultArrayCell = '';
-    //rows = parseInt(prompt('Ingrese el numero de filas: '));
-    //columns = parseInt(prompt('Ingrese el numero de columnas: '));
     arrayCells = new Array(rows);
     for (i = 0; i < arrayCells.length; i++) {
         arrayCells[i] = new Array(columns);
@@ -88,8 +85,6 @@ function initGame(){
         resultArrayCell += '\n';
     }
     newArray=arrayCells;
-    //console.log(resultArrayCell);
-    //iteration(arrayCells);
     return resultArrayCell;
 }
 
@@ -120,7 +115,6 @@ function iteration(ParamarrayCells){
 }
 
 function rulesCell(cell,rows,columns) {    
-    //console.log("vecinos=" + neighbors + "   fila" + rows + "  columna=" + columns)
     if ((cell.getLife() == 1) && (cell.getNeighbors() < 2)) {
         newArray[rows][columns].setLife(0);         // Soledad
     } else if ((cell.getLife() == 1) && (cell.getNeighbors() > 3)) {
@@ -141,7 +135,6 @@ function showResult(array){
         resutNewArray += '\n';
     }
     return resutNewArray;
-    //console.log(resutNewArray);
 }
 
 function sumTd (x,y){
