@@ -31,9 +31,70 @@ test('Se completo el juego correctamente', () => {
     expect(game.getArrayCell()).toBe(game.getArrayCell());
 });
 
-test('Prueba de las reglas para que una celula viva',()=> {
-    
+test('Prueba con celula viva y vecinos vivos menor que 2, regresa celula muerta en la misma fila y columna ',()=> {
+    game.newcell.setLife(1);
+    game.newcell.setNeighbors(1);
+    let row=2;
+    let column=2;
+    game.rulesCell(game.newcell,row,column);
+    let newArray=game.getNewArray();
+    let expectCellDead= newArray[row][column];
+    expect(expectCellDead.getLife()).toBe(0);
 });
+
+test('Prueba con celula viva y vecinos vivos mayor que 3, regresa celula muerta en la misma fila y columna ',()=> {
+    game.newcell.setLife(1);
+    game.newcell.setNeighbors(4);
+    let row=2;
+    let column=2;
+    game.rulesCell(game.newcell,row,column);
+    let newArray=game.getNewArray();
+    let expectCellDead= newArray[row][column];
+    expect(expectCellDead.getLife()).toBe(0);
+});
+
+test('Prueba con celula muerta y vecinos vivos = 3, regresa celula viva en la misma fila y columna ',()=> {
+    game.newcell.setLife(0);
+    game.newcell.setNeighbors(3);
+    let row=2;
+    let column=2;
+    game.rulesCell(game.newcell,row,column);
+    let newArray=game.getNewArray();
+    let expectCellDead= newArray[row][column];
+    expect(expectCellDead.getLife()).toBe(1);
+});
+test('Prueba con celula viva y vecinos vivos = 2, regresa celula viva en la misma fila y columna ',()=> {
+    game.newcell.setLife(1);
+    game.newcell.setNeighbors(2);
+    let row=2;
+    let column=2;
+    game.rulesCell(game.newcell,row,column);
+    let newArray=game.getNewArray();
+    let expectCellDead= newArray[row][column];
+    expect(expectCellDead.getLife()).toBe(1);
+});
+test('Prueba con celula viva y vecinos vivos = 3, regresa celula viva en la misma fila y columna ',()=> {
+    game.newcell.setLife(1);
+    game.newcell.setNeighbors(3);
+    let row=2;
+    let column=2;
+    game.rulesCell(game.newcell,row,column);
+    let newArray=game.getNewArray();
+    let expectCellDead= newArray[row][column];
+    expect(expectCellDead.getLife()).toBe(1);
+});
+// function rulesCell(cell,rows,columns) {    
+//     //console.log("vecinos=" + neighbors + "   fila" + rows + "  columna=" + columns)
+//     if ((cell.getLife() == 1) && (cell.getNeighbors() < 2)) {
+//         newArray[rows][columns].setLife(0);         // Soledad
+//     } else if ((cell.getLife() == 1) && (cell.getNeighbors() > 3)) {
+//         newArray[rows][columns].setLife(0);         // Sobrepoblación
+//     } else if ((cell.getLife() == 0) && (cell.getNeighbors() == 3)) {
+//         newArray[rows][columns].setLife(1);         // Reproducción
+//     } else {
+//         newArray[rows][columns] = cell;
+//     }
+// }
 
 /*
 test('test', () => {

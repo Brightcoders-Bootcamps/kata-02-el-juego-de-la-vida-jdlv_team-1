@@ -35,6 +35,7 @@ class Celula {
 let rows = 4, columns = 8;
 var resultArrayCell = '';
 var resutNewArray = '';
+var newArray;
 var cell;
 let arrayCells;
 let loopControler=0;
@@ -50,8 +51,10 @@ function getColumns(){
 function getArrayCell(){
     return resultArrayCell;
 }
+function getNewArray(){
+    return newArray;
+}
 
-play();
 function play(){
     var resultGame = initGame();
     console.log(resultGame);
@@ -145,7 +148,7 @@ function sumTd (x,y){
     return x + y;
 }
 
-
+play();
 let newcell = new Celula(0, 4);
 module.exports = {
     newcell,
@@ -157,4 +160,5 @@ module.exports = {
     getColumns,
     getArrayCell,
     sumTd,
+    getNewArray,
 }
