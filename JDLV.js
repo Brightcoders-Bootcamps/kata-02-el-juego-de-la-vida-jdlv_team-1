@@ -32,27 +32,23 @@ class Celula {
 };
 
 
-let numX = 4, numY = 8;
-var resutArrayCell = '';
+let rows = 4, columns = 8;
+var resultArrayCell = '';
 var resutNewArray = '';
 var cell;
 let arrayCells;
 let loopControler=0;
 
-function getNumX(){
-    return numX;
+function getRows(){
+    return rows;
 }
 
-function getNumY(){
-    return numY;
+function getColumns(){
+    return columns;
 }
 
 function getArrayCell(){
-    return resutArrayCell;
-}
-
-function getNewArray(){
-    return resutArrayCell;
+    return resultArrayCell;
 }
 
 play();
@@ -66,16 +62,16 @@ function play(){
 
 function initGame(){
     //let arrayCells;
-    resutArrayCell = '';
-    //numX = parseInt(prompt('Ingrese el numero de filas: '));
-    //numY = parseInt(prompt('Ingrese el numero de columnas: '));
-    arrayCells = new Array(numX);
+    resultArrayCell = '';
+    //rows = parseInt(prompt('Ingrese el numero de filas: '));
+    //columns = parseInt(prompt('Ingrese el numero de columnas: '));
+    arrayCells = new Array(rows);
     for (i = 0; i < arrayCells.length; i++) {
-        arrayCells[i] = new Array(numY);
+        arrayCells[i] = new Array(columns);
     }
 
-    for (let x = 0; x < numX; x++) {
-        for (let y = 0; y < numY; y++) {
+    for (let x = 0; x < rows; x++) {
+        for (let y = 0; y < columns; y++) {
             var randomvar = Math.random();
             if (randomvar >= 0.5) {
                 cell = new Celula(0, 0);
@@ -84,14 +80,14 @@ function initGame(){
                 cell = new Celula(1, 0);
                 arrayCells[x][y] = cell;
             }
-            resutArrayCell+= arrayCells[x][y].toString();
+            resultArrayCell+= arrayCells[x][y].toString();
         }
-        resutArrayCell += '\n';
+        resultArrayCell += '\n';
     }
     newArray=arrayCells;
-    //console.log(resutArrayCell);
+    //console.log(resultArrayCell);
     //iteration(arrayCells);
-    return resutArrayCell;
+    return resultArrayCell;
 }
 
 function iteration(ParamarrayCells){
@@ -100,8 +96,7 @@ function iteration(ParamarrayCells){
             let neighbors = 0;
             for (let i = -1; i <= 1; i++) {
                 for (let j = -1; j <= 1; j++) {
-                    try {
-                        
+                    try {                        
                         if (ParamarrayCells[x + i][y + j].getLife() == 1) {
                             if(ParamarrayCells[x][y].getLife() == 1 && i==0 && j==0){
                                 //console.log('se conto solo');
@@ -116,22 +111,21 @@ function iteration(ParamarrayCells){
                 }
             }
             ParamarrayCells[x][y].setNeighbors(neighbors);
-            rulesLife(ParamarrayCells[x][y],x,y);
+            rulesCell(ParamarrayCells[x][y],x,y);
         }
     }
 }
 
-function rulesLife(cell,x,y) {
-    
-    //console.log("vecinos=" + neighbors + "   fila" + x + "  columna=" + y)
+function rulesCell(cell,rows,columns) {    
+    //console.log("vecinos=" + neighbors + "   fila" + rows + "  columna=" + columns)
     if ((cell.getLife() == 1) && (cell.getNeighbors() < 2)) {
-        newArray[x][y].setLife(0);         // Soledad
+        newArray[rows][columns].setLife(0);         // Soledad
     } else if ((cell.getLife() == 1) && (cell.getNeighbors() > 3)) {
-        newArray[x][y].setLife(0);         // Sobrepoblación
+        newArray[rows][columns].setLife(0);         // Sobrepoblación
     } else if ((cell.getLife() == 0) && (cell.getNeighbors() == 3)) {
-        newArray[x][y].setLife(1);         // Reproducción
+        newArray[rows][columns].setLife(1);         // Reproducción
     } else {
-        newArray[x][y] = cell;
+        newArray[rows][columns] = cell;
     }
 }
 
@@ -154,15 +148,13 @@ function sumTd (x,y){
 
 let newcell = new Celula(0, 4);
 module.exports = {
-    
+    newcell,
     initGame,
     iteration,
-    rulesLife,
+    rulesCell,
     showResult,
-    getNumX,
-    getNumY,
+    getRows,
+    getColumns,
     getArrayCell,
-    getNewArray,
     sumTd,
-    newcell,
 }
