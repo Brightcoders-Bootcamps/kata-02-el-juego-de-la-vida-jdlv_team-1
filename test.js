@@ -1,9 +1,9 @@
 //const Celula = require('./celula'); // CommonJS
 const game = require('./JDLV');
 let row = 2;
-let column = 4;
-let newArray =game.getNewArray();
-let expectCellDead= newArray[row][column];
+let column = 2;
+// let life = 1;
+// let neighbors = 3;
 
 test('La suma es correcta', () => {
     expect(game.sumTd(1, 2)).toBe(3);
@@ -35,35 +35,31 @@ test('Se completo el juego correctamente', () => {
     expect(game.getArrayCell()).toBe(game.getArrayCell());
 });
 
-test('Prueba con celula viva y vecinos vivos menor que 2, regresa celula muerta en la misma fila y columna ',()=> {
-    game.newcell.setLife(1);
-    game.newcell.setNeighbors(1);
-    game.rulesCell(game.newcell,row,column);
-    expect(expectCellDead.getLife()).toBe(0);
-});
 
-test('Prueba con celula viva y vecinos vivos mayor que 3, regresa celula muerta en la misma fila y columna ',()=> {
-    game.newcell.setLife(1);
-    game.newcell.setNeighbors(4);
+var testCells = (life,neighbors) => { test('Prueba con celula viva y vecinos vivos = 3 ',()=> {
+    game.newcell.setLife(life);
+    game.newcell.setNeighbors(neighbors);
     game.rulesCell(game.newcell,row,column);
-    expect(expectCellDead.getLife()).toBe(0);
-});
+    let newArray =game.getNewArray();
+    let expectCellDead= newArray[row][column];        
 
-test('Prueba con celula muerta y vecinos vivos = 3, regresa celula viva en la misma fila y columna ',()=> {
-    game.newcell.setLife(0);
-    game.newcell.setNeighbors(3);
-    game.rulesCell(game.newcell,row,column);
-    expect(expectCellDead.getLife()).toBe(1);
+    if(life==0 && neighbors == 3){
+        console.log(`Celula ${life}, vecinos = ${neighbors}, la celula revive`);
+        expect(expectCellDead.getLife()).toBe(1);
+    }
+    if((life==1 && neighbors  < 2) || (life==1 && neighbors > 3 )){
+        console.log(`Celula ${life}, vecinos = ${neighbors}, la celula muere`);
+        expect(expectCellDead.getLife()).toBe(0);
+    }
+    if((life==1 && neighbors == 2) || (life==1 && neighbors == 3) ){
+        console.log(`Celula ${life}, vecinos = ${neighbors}, la celula sigue viviendo`);
+        expect(expectCellDead.getLife()).toBe(1);
+    }
 });
-test('Prueba con celula viva y vecinos vivos = 2, regresa celula viva en la misma fila y columna ',()=> {
-    game.newcell.setLife(1);
-    game.newcell.setNeighbors(2);
-    game.rulesCell(game.newcell,row,column);
-    expect(expectCellDead.getLife()).toBe(1);
-});
-test('Prueba con celula viva y vecinos vivos = 3, regresa celula viva en la misma fila y columna ',()=> {
-    game.newcell.setLife(1);
-    game.newcell.setNeighbors(3);
-    game.rulesCell(game.newcell,row,column);
-    expect(expectCellDead.getLife()).toBe(1);
-});
+};
+
+testCells(1,1);
+testCells(0,3);
+testCells(1,4);
+testCells(1,2);
+testCells(1,3);
