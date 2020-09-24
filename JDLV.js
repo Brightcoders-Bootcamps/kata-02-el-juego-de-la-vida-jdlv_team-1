@@ -108,7 +108,7 @@ function iteration(ParamarrayCells){
     for (var x = 0; x < ParamarrayCells.length; x++) {
         for (var y = 0; y < ParamarrayCells[x].length; y++) {
             let neighbors = 0;
-            countNeighborsAround(ParamarrayCells, neighbors, x, y)            
+            neighbors = countNeighborsAround(ParamarrayCells, neighbors, x, y)            
             ParamarrayCells[x][y].setNeighbors(neighbors);
             rulesCell(ParamarrayCells[x][y],x,y);
         }
@@ -118,20 +118,14 @@ function iteration(ParamarrayCells){
 function countNeighborsAround(ParamarrayCells, neighbors, x, y){
     for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
-            try {  
-                if (ParamarrayCells[x + i][y + j].getLife() == 1) {
-                    if(ParamarrayCells[x][y].getLife() == 1 && i==0 && j==0){
-                        //console.log('se conto solo');
-                    }else{
-                        neighbors++;
-                    }
-                }                     
-            
+            try { 
+                neighbors = cheackIfNeighborIsLife(ParamarrayCells[x + i][y + j], ParamarrayCells[x][y], neighbors)                   
             } catch (e) {
                 
             }
         }
     }
+    return neighbors;
 }
 
 function cheackIfNeighborIsLife(ParamarrayCellsAround, ParamarrayCellsSimple, neighbors){
