@@ -58,9 +58,18 @@ function getNewArray(){
 function play(){
     var resultGame = initGame();
     console.log(resultGame);
-    iteration(arrayCells);
-    var showRes = showResult(newArray);
-    console.log(showRes);
+    // iteration(arrayCells);
+    // var showRes = showResult(newArray);
+    // console.log(showRes);
+
+    let numberOfGenerations = 5;
+    for(let i = 0; i < numberOfGenerations; i++ ){
+    	 console.log("generacion:" + (i+1));
+    	 iteration(arrayCells)
+    	 let showRes = showResult(newArray);
+    	 console.log(showRes);
+    	 arrayCells = newArray;
+    }
 }
 
 function initGame(){
@@ -127,14 +136,14 @@ function rulesCell(cell,rows,columns) {
 }
 
 function showResult(array){
-    resutNewArray = '';
+    resultNewArray = '';
     for (let x = 0; x < array.length; x++) {
         for (let y = 0; y < array[x].length; y++) {
-            resutNewArray += arrayCells[x][y].toString();
+            resultNewArray += arrayCells[x][y].toString();
         }
-        resutNewArray += '\n';
+        resultNewArray += '\n';
     }
-    return resutNewArray;
+    return resultNewArray;
 }
 
 function sumTd (x,y){
@@ -143,6 +152,7 @@ function sumTd (x,y){
 
 play();
 let newcell = new Celula(0, 4);
+
 module.exports = {
     newcell,
     initGame,
