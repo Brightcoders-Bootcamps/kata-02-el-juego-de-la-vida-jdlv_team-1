@@ -2,8 +2,8 @@
 const game = require('./JDLV');
 let row = 2;
 let column = 4;
-let newArray;
-let expectCellDead;
+let newArray =game.getNewArray();
+let expectCellDead= newArray[row][column];
 
 test('La suma es correcta', () => {
     expect(game.sumTd(1, 2)).toBe(3);
@@ -38,8 +38,6 @@ test('Se completo el juego correctamente', () => {
 test('Prueba con celula viva y vecinos vivos menor que 2, regresa celula muerta en la misma fila y columna ',()=> {
     game.newcell.setLife(1);
     game.newcell.setNeighbors(1);
-    newArray=game.getNewArray();
-    expectCellDead= newArray[row][column];
     game.rulesCell(game.newcell,row,column);
     expect(expectCellDead.getLife()).toBe(0);
 });
@@ -48,8 +46,6 @@ test('Prueba con celula viva y vecinos vivos mayor que 3, regresa celula muerta 
     game.newcell.setLife(1);
     game.newcell.setNeighbors(4);
     game.rulesCell(game.newcell,row,column);
-    newArray=game.getNewArray();
-    expectCellDead= newArray[row][column];
     expect(expectCellDead.getLife()).toBe(0);
 });
 
@@ -57,46 +53,17 @@ test('Prueba con celula muerta y vecinos vivos = 3, regresa celula viva en la mi
     game.newcell.setLife(0);
     game.newcell.setNeighbors(3);
     game.rulesCell(game.newcell,row,column);
-    newArray=game.getNewArray();
-    expectCellDead= newArray[row][column];
     expect(expectCellDead.getLife()).toBe(1);
 });
 test('Prueba con celula viva y vecinos vivos = 2, regresa celula viva en la misma fila y columna ',()=> {
     game.newcell.setLife(1);
     game.newcell.setNeighbors(2);
-    let row=2;
-    let column=2;
     game.rulesCell(game.newcell,row,column);
-    let newArray=game.getNewArray();
-    let expectCellDead= newArray[row][column];
     expect(expectCellDead.getLife()).toBe(1);
 });
 test('Prueba con celula viva y vecinos vivos = 3, regresa celula viva en la misma fila y columna ',()=> {
     game.newcell.setLife(1);
     game.newcell.setNeighbors(3);
-    let row=2;
-    let column=2;
     game.rulesCell(game.newcell,row,column);
-    let newArray=game.getNewArray();
-    let expectCellDead= newArray[row][column];
     expect(expectCellDead.getLife()).toBe(1);
 });
-
-
-// test('visualizar el resultado del arreglo en cadena',()=> {
-//     game.showResult(array);
-//     expect(showResult()).toBe(array);
-    
-// });
-
-
-// function showResult(array){
-//     resutNewArray = '';
-//     for (let x = 0; x < array.length; x++) {
-//         for (let y = 0; y < array[x].length; y++) {
-//             resutNewArray += arrayCells[x][y].toString();
-//         }
-//         resutNewArray += '\n';
-//     }
-//     return resutNewArray;
-// }
