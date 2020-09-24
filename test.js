@@ -36,7 +36,8 @@ test('Se completo el juego correctamente', () => {
 });
 
 
-var testCells = (life,neighbors) => { test('Prueba con celula viva y vecinos vivos = 3 ',()=> {
+var testCells = (life,neighbors) => 
+{ test('Prueba con celula viva y vecinos vivos = 3 ',()=> {
     game.newcell.setLife(life);
     game.newcell.setNeighbors(neighbors);
     game.rulesCell(game.newcell,row,column);
@@ -47,13 +48,15 @@ var testCells = (life,neighbors) => { test('Prueba con celula viva y vecinos viv
         console.log(`Celula ${life}, vecinos = ${neighbors}, la celula revive`);
         expect(expectCellDead.getLife()).toBe(1);
     }
-    if((life==1 && neighbors  < 2) || (life==1 && neighbors > 3 )){
-        console.log(`Celula ${life}, vecinos = ${neighbors}, la celula muere`);
-        expect(expectCellDead.getLife()).toBe(0);
-    }
-    if((life==1 && neighbors == 2) || (life==1 && neighbors == 3) ){
-        console.log(`Celula ${life}, vecinos = ${neighbors}, la celula sigue viviendo`);
-        expect(expectCellDead.getLife()).toBe(1);
+    if(life==1){
+        if(neighbors < 2 || neighbors > 3){
+            console.log(`Celula ${life}, vecinos = ${neighbors}, la celula muere`);
+            expect(expectCellDead.getLife()).toBe(0);
+        }
+        if(neighbors == 2 || neighbors == 3){            
+            console.log(`Celula ${life}, vecinos = ${neighbors}, la celula sigue viviendo`);
+            expect(expectCellDead.getLife()).toBe(1);
+        }
     }
 });
 };
