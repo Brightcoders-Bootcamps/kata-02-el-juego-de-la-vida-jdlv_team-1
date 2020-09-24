@@ -74,21 +74,12 @@ function play(){
 
 function initGame(){
     resultArrayCell = '';
-    arrayCells = new Array(rows);
-    for (i = 0; i < arrayCells.length; i++) {
-        arrayCells[i] = new Array(columns);
-    }
-
+    createArrayCell();
     for (let x = 0; x < rows; x++) {
         for (let y = 0; y < columns; y++) {
             var randomvar = Math.random();
-            if (randomvar >= 0.5) {
-                cell = new Celula(0, 0);
-                arrayCells[x][y] = cell;
-            } else {
-                cell = new Celula(1, 0);
-                arrayCells[x][y] = cell;
-            }
+            if (randomvar >= 0.5) { arrayCells[x][y] = new Celula(0, 0); } 
+            else { arrayCells[x][y] =  new Celula(1, 0);;   }
             resultArrayCell+= arrayCells[x][y].toString();
         }
         resultArrayCell += '\n';
@@ -96,6 +87,13 @@ function initGame(){
     newArray=arrayCells;
     return resultArrayCell;
 }
+
+function createArrayCell(){
+    arrayCells = new Array(rows);
+    for (i = 0; i < arrayCells.length; i++) {
+        arrayCells[i] = new Array(columns);
+    }
+} 
 
 function iteration(ParamarrayCells){
     for (var x = 0; x < ParamarrayCells.length; x++) {
