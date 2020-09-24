@@ -78,8 +78,7 @@ function initGame(){
     for (let x = 0; x < rows; x++) {
         for (let y = 0; y < columns; y++) {
             var randomvar = Math.random();
-            if (randomvar >= 0.5) { arrayCells[x][y] = new Celula(0, 0); } 
-            else { arrayCells[x][y] =  new Celula(1, 0);;   }
+            arrayCells[x][y] = checkRamdomVar( randomvar, arrayCells[x][y]);
             resultArrayCell+= arrayCells[x][y].toString();
         }
         resultArrayCell += '\n';
@@ -95,31 +94,56 @@ function createArrayCell(){
     }
 } 
 
+function checkRamdomVar(randomvar, arrayCells){
+    if (randomvar >= 0.5) { 
+        arrayCells = new Celula(0, 0);
+    } 
+    else { 
+        arrayCells =  new Celula(1, 0);   
+    }
+    return arrayCells;
+}
+
 function iteration(ParamarrayCells){
     for (var x = 0; x < ParamarrayCells.length; x++) {
         for (var y = 0; y < ParamarrayCells[x].length; y++) {
             let neighbors = 0;
-            for (let i = -1; i <= 1; i++) {
-                for (let j = -1; j <= 1; j++) {
-                    try {                        
-                        if (ParamarrayCells[x + i][y + j].getLife() == 1) {
-                            if(ParamarrayCells[x][y].getLife() == 1 && i==0 && j==0){
-                                //console.log('se conto solo');
-                            }else{
-                                neighbors++;
-                            }
-                            
-                        }
-                    } catch (e) {
-                        
-                    }
-                }
-            }
+            countNeighborsAround(ParamarrayCells, neighbors, x, y)            
             ParamarrayCells[x][y].setNeighbors(neighbors);
             rulesCell(ParamarrayCells[x][y],x,y);
         }
     }
 }
+
+function countNeighborsAround(ParamarrayCells, neighbors, x, y){
+    for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+            try {  
+                if (ParamarrayCells[x + i][y + j].getLife() == 1) {
+                    if(ParamarrayCells[x][y].getLife() == 1 && i==0 && j==0){
+                        //console.log('se conto solo');
+                    }else{
+                        neighbors++;
+                    }
+                }                     
+            
+            } catch (e) {
+                
+            }
+        }
+    }
+}
+
+function cheackIfNeighborIsLife(ParamarrayCellsAround, ParamarrayCellsSimple, neighbors){
+    if (ParamarrayCellsAround.getLife() == 1) {
+        if(ParamarrayCellsSimple.getLife() == 1 && i==0 && j==0){
+            //console.log('se conto solo');
+        }else{
+            neighbors++;
+        }
+    }
+    return neighbors;
+} 
 
 function rulesCell(cell,rows,columns) {    
     if ((cell.getLife() == 1) && (cell.getNeighbors() < 2)) {
