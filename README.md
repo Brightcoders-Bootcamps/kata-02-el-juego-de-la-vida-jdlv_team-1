@@ -72,11 +72,11 @@ Generation 2:
 - El repositorio debe reflejar el trabajo en equipo (en la conversación del repositorio, commits)
 - Debe actualizar [este archivo](setup/README.md) en donde se describa el proceso para hacer funcionar el proyecto 
 ## Ejecutar Proyecto
--clonar el repositorio
--ejecutar npm install
--ejecutar npm run test
--Si desea puede abrir index.html en el navegador mediante live server
--abrir la consola del navegador para ver las generaciones
+- clonar el repositorio
+- ejecutar npm install
+- ejecutar npm run test
+- Si desea puede abrir index.html en el navegador mediante live server
+- abrir la consola del navegador para ver las generaciones
 ## Evaluación / Revisión
 - Cumplimiento de requerimientos funcionales
 - Cumplimiento de requerimientos no funcionales 
