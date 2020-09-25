@@ -46,8 +46,8 @@ var testCells = (life, neighbors, LifeExpected) => { test(`Prueba con celula ${l
 });
 };
 
-testCells(1,1,0);
-testCells(0,3,1);
-testCells(1,4,0);
-testCells(1,2,1);
-testCells(1,3,1);
+testCells(1,1,0);//test con celula viva, vecinos<2 y celula esperada muerta
+testCells(0,3,1);//test con celula muerta, vecinos=3 y celula esperada viva
+testCells(1,4,0);//test con celula viva, vecinos>3 y celula esperada muerta
+testCells(1,2,1);//test con celula viva, vecinos=2 y celula esperada viva
+testCells(1,3,1);//test con celula viva, vecinos=3 y celula esperada viva
